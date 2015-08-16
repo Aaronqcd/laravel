@@ -15,7 +15,9 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'smtp'),
+    //'driver' => env('MAIL_DRIVER', 'smtp'),
+    'driver' => env('MAIL_DRIVER'),
+	//'driver' => 'smtp',
 
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +30,9 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST'),
+    //'host' => env('MAIL_HOST', 'smtp.qq.com'),
+    //'host' => 'smtp.qq.com',
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +45,9 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => env('MAIL_PORT'),
+    //'port' => env('MAIL_PORT', 25),
+	//'port' => 25,
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +60,8 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    //'from' => ['address' => '812159920@qq.com', 'name' => 'TestEmail'],
+	'from' => ['address' => '18200390678@163.com', 'name' => 'TestEmail'],
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +74,8 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    //'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+	'encryption' => env('MAIL_ENCRYPTION'),
 
     /*
     |--------------------------------------------------------------------------

@@ -7,29 +7,39 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use DB;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
+    
+    public function __construct()
+    {
+    }
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'user';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'job', 'phone'];
 
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['id','token'];
+    
+    /* public static function findOrFail($id) {
+    	return DB::select('select * from user where id=?', [$id]);
+    } */
+    
 }

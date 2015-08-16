@@ -14,21 +14,13 @@
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-/*Route::get('/', function () {
-    return 'Hello World';
-});
-Route::post('foo/bar', function () {
-    return 'Hello World';
-});
-
-Route::put('foo/bar', function () {
-    //
-});
-
-Route::delete('foo/bar', function () {
-    //
+/*Route::get('user/{name}', 'UserController@showProfile');
+Route::get('/', function ()    {
+	return view('greeting', ['name' => 'James']);
 });*/
-/*Route::match(['get', 'post'], '/', function () {
-    return 'Hello World';
+/*Route::get('user', function ()    {
+	return view('user');
 });*/
-//Route::get('home', 'HomeController@index');
+Route::get('user', 'UserController@index');
+Route::get('userEdit/{id}', 'UserController@findById');
+Route::post('userUpdate', 'UserController@update');
