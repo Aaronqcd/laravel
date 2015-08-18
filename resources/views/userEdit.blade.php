@@ -36,7 +36,6 @@
 				    <input type="text" name="phone" placeholder="Phone" value="{{ $user->phone }}">
 				  </div>
 				  <input type="hidden" name="id"  value="{{ $user->id }}">
-				  <!-- <input type="hidden" name="_method" value="PUT"> -->
 				  <input type="hidden" name="_token" value="{{ csrf_token() }}">
 				  <button class="ui button" type="submit" style="float: right">修改</button>
 					@endforeach

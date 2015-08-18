@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Jobs\SendEmail;
 use App\User;
-//use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Redirect;
+use App\Services\Pagination\Pagination;
+use App\Services\Factory\SimpleFactory;
+
 
 class UserController extends Controller
 {
@@ -19,9 +22,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::select('select * from user');
-
-        return view('user', ['users' => $users]);
+    	$users = SimpleFactory::createSearch();
+    	$users->setPath('user');
+    	$page = new Pagination($users);
+    	$links = $page->render();
+    	
+        return view('user', ['users' => $users, 'links' => $links]);
     }
     
     /**
@@ -32,7 +38,6 @@ class UserController extends Controller
     public function findById($id)
     {
     	$users = DB::select('select * from user where id=?', [$id]);
-    	//$user = DB::table('user')->where('id', $id);
     
     	return view('userEdit', ['users' => $users]);
     }
@@ -44,10 +49,6 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-    	/* $name = Input::get('name');
-    	$job = Input::get('job');
-    	$phone = Input::get('phone');
-    	$id = Input::get('id'); */
     	$name = $request->input('name');
     	$job = $request->input('job');
     	$phone = $request->input('phone');
@@ -57,9 +58,36 @@ class UserController extends Controller
     	$user = new User();
     	$user = User::findOrFail($id);
     	$this->dispatch(new SendEmail($user));
-    	//$user = DB::table('user')->where('id', $id);
     	
-    	$userController = new UserController;
-    	return $userController->index();
+    	return Redirect::to('user');
+    }
+    
+    /**
+     * Add user.
+     *
+     * @return Response
+     */
+    public function add(Request $request)
+    {
+    	$name = $request->input('name');
+    	$job = $request->input('job');
+    	$phone = $request->input('phone');
+    	$email = $request->input('email');
+    	DB::insert('insert into user (name,job,phone,email) values 
+    			(?,?,?,?)', [$name,$job,$phone,$email]);
+    
+    	return Redirect::to('user');
+    }
+    
+    /**
+     * Delete user by user's id.
+     *
+     * @return Response
+     */
+    public function deleteById($id)
+    {
+    	$users = DB::delete('delete from user where id=?', [$id]);
+    
+    	return Redirect::to('user');
     }
 }

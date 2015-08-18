@@ -22,5 +22,11 @@ Route::get('/', function ()    {
 	return view('user');
 });*/
 Route::get('user', 'UserController@index');
+Route::post('user', 'UserController@index');
 Route::get('userEdit/{id}', 'UserController@findById');
 Route::post('userUpdate', 'UserController@update');
+Route::get('userAdd', function ()    {
+	return view('userAdd');
+});
+Route::post('userAdd', 'UserController@add');
+Route::get('userDelete/{id}', 'UserController@deleteById');

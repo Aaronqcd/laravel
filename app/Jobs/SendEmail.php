@@ -40,7 +40,7 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
         $user = $this->user;
     	Mail::send('greeting', ['user' => $user], function($message) use($user)
         {
-        	$message->to($user['email'], $user['name'])->subject('welcome');
+        	$message->to($user['email'], $user['name'])->subject('update info');
         });
 
     }
