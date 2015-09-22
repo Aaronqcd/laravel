@@ -11,16 +11,6 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-/*Route::get('user/{name}', 'UserController@showProfile');
-Route::get('/', function ()    {
-	return view('greeting', ['name' => 'James']);
-});*/
-/*Route::get('user', function ()    {
-	return view('user');
-});*/
 Route::get('user', 'UserController@index');
 Route::post('user', 'UserController@index');
 Route::get('userEdit/{id}', 'UserController@findById');
